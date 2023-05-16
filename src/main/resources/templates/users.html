@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Пользоветели</title>
+</head>
+<body>
+<div>
+    <table th:border="1" align="center" cellpadding="5">
+        <tr>
+            <th>Имя</th>
+            <th>Фимилия</th>
+            <th>eMail</th>
+            <th>Пароль</th>
+            <th>Действие</th>
+
+        </tr>
+        <tr th:each="listUser : ${usersList}">
+            <td th:utext="${listUser.getName()}">...</td>
+            <td th:utext="${listUser.getLastName()}">...</td>
+            <td th:utext="${listUser.getEmail()}">...</td>
+            <td th:utext="${listUser.getPassword()}">...</td>
+            <td>
+                <form th:method="GET" th:action="@{/users/editUser}">
+                    <input type="hidden" th:name="id" th:value="${listUser.getId()}"/>
+                    <button>Редактировать</button>
+                </form>
+                <br>
+                <form th:method="DELETE" th:action="@{/users}">
+                    <input type="hidden" th:name="id" th:value="${listUser.getId()}"/>
+                    <button>Удалить</button>
+                </form>
+        </td>
+        </tr>
+    </table>
+    <br>
+    <div th:align="center">
+    <form th:action="@{/users/addUser}">
+        <input type="submit" th:value="Добавить"/>
+    </form>
+    </div>
+</div>
+</body>
+</html>
