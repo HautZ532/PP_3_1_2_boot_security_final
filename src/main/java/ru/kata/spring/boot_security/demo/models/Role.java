@@ -17,9 +17,14 @@ public class Role implements GrantedAuthority {
     @Column(name = "role")
     private String role;
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "roles_id"), inverseJoinColumns = @JoinColumn(name = "users_id"))
-    private List<User> users;
+//    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+//    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "roles_id"), inverseJoinColumns = @JoinColumn(name = "users_id"))
+//    private List<User> users;
+
+    @Override
+    public String toString() {
+        return  role;
+    }
 
     public Role() {
 

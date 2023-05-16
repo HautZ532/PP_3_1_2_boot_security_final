@@ -12,6 +12,7 @@
             <th>Фимилия</th>
             <th>eMail</th>
             <th>Пароль</th>
+            <th>Права</th>
             <th>Действие</th>
 
         </tr>
@@ -20,13 +21,15 @@
             <td th:utext="${listUser.getLastName()}">...</td>
             <td th:utext="${listUser.getEmail()}">...</td>
             <td th:utext="${listUser.getPassword()}">...</td>
+            <td th:utext="${listUser.getRoles()}">...</td>
             <td>
-                <form th:method="GET" th:action="@{/users/editUser}">
+                <form th:method="GET" th:action="@{users/editUser}">
                     <input type="hidden" th:name="id" th:value="${listUser.getId()}"/>
+                    <input type="hidden" th:name="role" th:value="${listUser.getRoles()}">
                     <button>Редактировать</button>
                 </form>
                 <br>
-                <form th:method="DELETE" th:action="@{/users}">
+                <form th:method="DELETE" th:action="@{users}">
                     <input type="hidden" th:name="id" th:value="${listUser.getId()}"/>
                     <button>Удалить</button>
                 </form>
@@ -35,8 +38,12 @@
     </table>
     <br>
     <div th:align="center">
-    <form th:action="@{/users/addUser}">
+    <form th:action="@{users/addUser}">
         <input type="submit" th:value="Добавить"/>
+    </form>
+    <br>
+    <form th:action="@{/admin}">
+        <input type="submit" th:value="Назад"/>
     </form>
     </div>
 </div>

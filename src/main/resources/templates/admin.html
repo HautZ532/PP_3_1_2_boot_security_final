@@ -2,9 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Spring Security Example</title>
+    <title>Администратор</title>
 </head>
 <body>
-<h1>Admin, welcome spring boot security page!</h1>
+<h1 th:align="center">Admin, welcome spring boot security page!</h1>
+<br>
+<div>
+    <table th:border="1" align="center" cellpadding="5">
+        <tr>
+            <th>Имя</th>
+            <th>Фимилия</th>
+            <th>eMail</th>
+            <th>Пароль</th>
+
+<!--        </tr>-->
+<!--            <td th:utext="${admin.getName()}">...</td>-->
+<!--            <td th:utext="${admin.getLastName()}">...</td>-->
+<!--            <td th:utext="${admin.getEmail()}">...</td>-->
+<!--            <td th:utext="${admin.getPassword()}">...</td>-->
+<!--        </tr>-->
+    </table>
+</div>
+<br>
+<div th:align="center">
+    <form th:action="@{/admin/users}">
+        <input type="submit" th:value="Администрирование"/>
+    </form>
+    <br>
+    <form th:action="@{/logout}">
+        <input type="submit" th:value="Выйти"/>
+    </form>
+</div>
 </body>
 </html>
