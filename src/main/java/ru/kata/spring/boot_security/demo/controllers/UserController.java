@@ -20,10 +20,10 @@ public class UserController {
         this.userService = userService;
     }
 
-//    @GetMapping()
-//    public String printUser(Principal principal, Model model) {
-//        User user = userService.getUserByName(principal.getName());
-//        model.addAttribute("user", user);
-//        return "user";
-//    }
+    @GetMapping()
+    public String printUser(Principal principal, Model model) {
+        User user = userService.getUserByName(principal.getName());
+        model.addAttribute("user", user);
+        return "user";
+    }
 }

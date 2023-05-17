@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <title>Пользователь</title>
 </head>
@@ -14,12 +14,12 @@
             <th>eMail</th>
             <th>Пароль</th>
 
-<!--        </tr>-->
-<!--            <td th:utext="${user.getName()}">...</td>-->
-<!--            <td th:utext="${user.getLastName()}">...</td>-->
-<!--            <td th:utext="${user.getEmail()}">...</td>-->
-<!--            <td th:utext="${user.getPassword()}">...</td>-->
-<!--        </tr>-->
+        </tr>
+        <td th:utext="${user.getName()}">...</td>
+        <td th:utext="${user.getLastName()}">...</td>
+        <td th:utext="${user.getEmail()}">...</td>
+        <td th:utext="${user.getPassword()}">...</td>
+        </tr>
     </table>
 </div>
 <br>

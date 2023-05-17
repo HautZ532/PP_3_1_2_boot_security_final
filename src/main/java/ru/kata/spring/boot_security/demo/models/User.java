@@ -7,7 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.util.Collection;
-import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -112,11 +112,18 @@ public class User implements UserDetails {
         return name;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(roles, user.roles);
+    }
 
-
-
-
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, lastName, email, password, roles);
+    }
 
     @Override
     public boolean isAccountNonExpired() {

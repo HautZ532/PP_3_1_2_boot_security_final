@@ -6,7 +6,6 @@ import ru.kata.spring.boot_security.demo.models.Role;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-import java.util.Set;
 
 @Repository
 public class RoleDaoImp implements RoleDao {

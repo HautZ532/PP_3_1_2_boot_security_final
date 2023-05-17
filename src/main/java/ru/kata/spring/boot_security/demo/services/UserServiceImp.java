@@ -1,13 +1,13 @@
 package ru.kata.spring.boot_security.demo.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.dao.UserDao;
 import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,15 +17,18 @@ import java.util.Set;
 public class UserServiceImp implements UserService {
     private final UserDao userDao;
     private final RoleService roleService;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImp(UserDao userDao, RoleService roleService) {
+    public UserServiceImp(UserDao userDao, RoleService roleService, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
         this.roleService = roleService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public void saveUser(User user, Long[] roles) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         addRole(user, roles);
         userDao.saveUser(user);
     }
@@ -43,6 +46,7 @@ public class UserServiceImp implements UserService {
 
     @Override
     public void editUser(User user, Long[] roles) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         addRole(user, roles);
         userDao.editUser(user);
     }
@@ -58,6 +62,7 @@ public class UserServiceImp implements UserService {
     public User getUserByName(String name) {
         return userDao.getUserByName(name);
     }
+
     private void addRole(User user, Long[] roles) {
         Set<Role> roleSet = new HashSet<>();
         for (Long role : roles) {
