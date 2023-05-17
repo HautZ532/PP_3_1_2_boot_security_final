@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <title>Пользователь</title>
 </head>
@@ -15,11 +15,10 @@
             <th>Пароль</th>
 
         </tr>
-        <td th:utext="${user.getName()}">...</td>
-        <td th:utext="${user.getLastName()}">...</td>
-        <td th:utext="${user.getEmail()}">...</td>
-        <td th:utext="${user.getPassword()}">...</td>
-        </tr>
+            <td th:utext="${user.getName()}">...</td>
+            <td th:utext="${user.getLastName()}">...</td>
+            <td th:utext="${user.getEmail()}">...</td>
+            <td th:utext="${user.getPassword()}">...</td>
     </table>
 </div>
 <br>
