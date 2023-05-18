@@ -2,6 +2,7 @@ package ru.kata.spring.boot_security.demo.models;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -54,7 +55,6 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-    // второй геттер
     public String getName() {
         return name;
     }
