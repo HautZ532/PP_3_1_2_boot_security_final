@@ -2,10 +2,10 @@ package ru.kata.spring.boot_security.demo.models;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import java.util.Collection;
 import java.util.Objects;
@@ -19,28 +19,38 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "username")
     @NotEmpty(message = "Укажите имя")
     private String name;
 
-    @Column(name = "last_name")
+    @Column(name = "surname")
     @NotEmpty(message = "Укажите фамилию")
-    private String lastName;
+    private String surname;
+
+    @Column(name = "age")
+    @NotEmpty(message = "Укажите возраст")
+    private String age;
 
     @Column(name = "email")
     @NotEmpty(message = "Укажите почту")
     @Email(message = "Не верный формат почты")
-    private String email;
+    private String username;
 
     @Column(name = "password")
     @NotEmpty(message = "Укажите пароль")
     private String password;
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "users_id"), inverseJoinColumns = @JoinColumn(name = "roles_id"))
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
     public User() {
+    }
+
+    public User(String username, String password, Collection<? extends org.springframework.security.core.GrantedAuthority> authorities) {
+        this.roles = (Set<Role>) authorities;
+        this.username = username;
+        this.password = password;
     }
 
     public void setPassword(String password) {
@@ -55,8 +65,24 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public Long getId() {
@@ -67,33 +93,23 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getAge() {
+        return age;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setAge(String age) {
+        this.age = age;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
+                "username='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", age='" + age + '\'' +
+                ", email='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", roles=" + roles +
                 '}';
     }
 
@@ -109,7 +125,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return name;
+        return username;
     }
 
     @Override
@@ -117,12 +133,12 @@ public class User implements UserDetails {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(roles, user.roles);
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(surname, user.surname) && Objects.equals(age, user.age) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(roles, user.roles);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, lastName, email, password, roles);
+        return Objects.hash(id, name, surname, age, username, password, roles);
     }
 
     @Override

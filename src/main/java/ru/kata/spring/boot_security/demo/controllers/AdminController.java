@@ -29,13 +29,16 @@ public class AdminController {
     public String printAdmin(Principal principal, Model model) {
         User admin = userService.getUserByName(principal.getName());
         model.addAttribute("admin", admin);
-        return "admin";
+        model.addAttribute("rolesList", roleService.getAllRoles());
+        model.addAttribute("usersList", userService.getAllUsers());
+        model.addAttribute("newUser", new User());
+        return "bootstrap/admin-page";
     }
 
     @GetMapping("/users")
     public String printAllUsers(Model model) {
         model.addAttribute("usersList", userService.getAllUsers());
-        return "users";
+        return "springSecurity/users";
     }
 
     @GetMapping("/users/addUser")
@@ -43,13 +46,13 @@ public class AdminController {
         model.addAttribute("user", new User());
         List<Role> roles = roleService.getAllRoles();
         model.addAttribute("allRoles", roles);
-        return "saveUser";
+        return "springSecurity/saveUser";
     }
 
-    @PostMapping("/users")
+    @PostMapping("/new")
     public String saveUser(@ModelAttribute("user") User user, @RequestParam(value = "rolesId") Long[] roles) {
         userService.saveUser(user, roles);
-        return "redirect:/admin/users";
+        return "redirect:/admin";
     }
 
     @GetMapping("/users/editUser")
@@ -57,18 +60,18 @@ public class AdminController {
         model.addAttribute("user", userService.getUser(id));
         List<Role> roles = roleService.getAllRoles();
         model.addAttribute("allRoles", roles);
-        return "userEdit";
+        return "springSecurity/userEdit";
     }
 
-    @PatchMapping("/users")
+    @PatchMapping()
     public String userUpdate(@ModelAttribute("user") User user, @RequestParam(value = "rolesId") Long[] roles) {
         userService.editUser(user, roles);
-        return "redirect:/admin/users";
+        return "redirect:/admin";
     }
 
-    @DeleteMapping("/users")
+    @DeleteMapping()
     public String removeUser(@RequestParam("id") Long id) {
         userService.removeUser(id);
-        return "redirect:/admin/users";
+        return "redirect:/admin";
     }
 }

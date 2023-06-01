@@ -59,8 +59,8 @@ public class UserServiceImp implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public User getUserByName(String name) {
-        return userDao.getUserByName(name);
+    public User getUserByName(String username) {
+        return userDao.getUserByName(username);
     }
 
     private void addRole(User user, Long[] roles) {

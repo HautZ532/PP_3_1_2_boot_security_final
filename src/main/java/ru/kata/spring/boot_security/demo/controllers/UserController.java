@@ -24,6 +24,6 @@ public class UserController {
     public String printUser(Principal principal, Model model) {
         User user = userService.getUserByName(principal.getName());
         model.addAttribute("user", user);
-        return "user";
+        return "bootstrap/user-page";
     }
 }

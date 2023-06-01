@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table
+@Table(name = "roles")
 public class Role implements GrantedAuthority {
 
     @Id
