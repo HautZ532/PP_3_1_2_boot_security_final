@@ -47,7 +47,7 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String username, String password, Collection<? extends org.springframework.security.core.GrantedAuthority> authorities) {
+    public User(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         this.roles = (Set<Role>) authorities;
         this.username = username;
         this.password = password;
