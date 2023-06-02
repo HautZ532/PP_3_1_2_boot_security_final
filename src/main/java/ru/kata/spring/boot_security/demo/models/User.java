@@ -2,7 +2,6 @@ package ru.kata.spring.boot_security.demo.models;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -43,7 +42,7 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String name, String password, Collection<? extends org.springframework.security.core.GrantedAuthority> authorities) {
+    public User(String name, String password, Collection<? extends GrantedAuthority> authorities) {
         this.roles = (Set<Role>) authorities;
         this.name = name;
         this.password = password;
@@ -62,7 +61,7 @@ public class User implements UserDetails {
     }
 
     public String getName() {
-        return name;
+        return email;
     }
 
     public Long getId() {
