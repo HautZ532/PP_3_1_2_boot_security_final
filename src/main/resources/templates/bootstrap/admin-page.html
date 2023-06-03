@@ -80,38 +80,20 @@
                                             <th>Удалить</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        <tr th:each="user : ${usersList}">
-                                            <td th:text="${user.getId()}"></td>
-                                            <td th:text="${user.getName()}"></td>
-                                            <td th:text="${user.getSurname()}"></td>
-                                            <td th:text="${user.getAge()}"></td>
-                                            <td th:text="${user.getUsername()}"></td>
-                                            <td>
-                                                <span th:each="role : ${user.getRoles()}" th:switch="${role.getRole()}">
-                                                    <span th:case="'ROLE_ADMIN'">ADMIN</span>
-                                                    <span th:case="'ROLE_USER'">USER</span>
-                                                </span>
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-info" data-bs-toggle="modal"
-                                                        th:data-bs-target="${'#editModal'+ user.getId()}"
-                                                        th:data-row="${user}">Редактировать
-                                                </button>
-                                                <div aria-hidden="true" aria-labelledby="edit"
-                                                     class="modal fade" th:id="${'editModal'+ user.getId()}">
+
+                                        <tbody id="user_table">
+
+                                                <div aria-hidden="true" aria-labelledby="edit" tabindex="-1"
+                                                     class="modal fade" id="editModal">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="editMadalLabel">
+                                                                <h5 class="modal-title" id="edit">
                                                                     Редактирование пользователя</h5>
                                                                 <button aria-label="Close" class="btn-close"
                                                                         data-bs-dismiss="modal"
                                                                         type="button"></button>
                                                             </div>
-                                                            <form th:action="@{/admin}"
-                                                                  th:method="PATCH"
-                                                                  th:object="${user}">
                                                                 <div class="modal-body">
                                                                     <div class="mb-3">
                                                                         <label class="col-form-label"
@@ -119,7 +101,7 @@
                                                                         <input class="form-control mx-auto"
                                                                                id="idEdit" name="id"
                                                                                readonly style="width: 50%"
-                                                                               th:value="${user.getId()}" type="text"/>
+                                                                               type="text"/>
                                                                     </div>
                                                                     <div class="mb-3">
                                                                         <label class="col-form-label"
@@ -128,7 +110,7 @@
                                                                                id="nameEdit" name="name"
                                                                                required
                                                                                style="width: 50%"
-                                                                               th:value="${user.getName}" type="text"/>
+                                                                               type="text"/>
                                                                     </div>
                                                                     <div class="mb-3">
                                                                         <label class="col-form-label"
@@ -138,7 +120,7 @@
                                                                                name="surname"
                                                                                required
                                                                                style="width: 50%"
-                                                                               th:value="${user.getSurname()}" type="text"/>
+                                                                               type="text"/>
                                                                     </div>
                                                                     <div class="mb-3">
                                                                         <label class="col-form-label"
@@ -147,7 +129,7 @@
                                                                                id="ageEdit"
                                                                                name="age"
                                                                                required style="width: 50%"
-                                                                               th:value="${user.getAge()}" type="text"/>
+                                                                               type="text"/>
                                                                     </div>
                                                                     <div class="mb-3">
                                                                         <label class="col-form-label"
@@ -157,7 +139,7 @@
                                                                                name="username"
                                                                                required
                                                                                style="width: 50%"
-                                                                               th:value="${user.getUsername()}" type="email"/>
+                                                                               type="email"/>
                                                                     </div>
                                                                     <div class="mb-3">
                                                                         <label class="col-form-label"
@@ -167,7 +149,7 @@
                                                                                name="password"
                                                                                required
                                                                                style="width: 50%"
-                                                                               th:value="${user.getPassword()}" type="password"/>
+                                                                               type="password"/>
                                                                     </div>
                                                                     <div class="mb-3">
                                                                         <label for="rolesEdit"><b>Права</b></label>
@@ -184,23 +166,14 @@
                                                                     <button class="btn btn-secondary" data-bs-dismiss="modal"
                                                                             type="button">Закрыть
                                                                     </button>
-<!--                                                                    <tr th:each="role: ${allRoles}">-->
-<!--                                                                        <input type="hidden" name="rolesId" th:text="${role.role}" th:value="${role.id}">-->
-<!--                                                                    </tr>-->
                                                                     <button class="btn btn-primary" type="submit">
                                                                         Редактировать
                                                                     </button>
                                                                 </div>
-                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-danger" data-bs-toggle="modal"
-                                                        th:data-bs-target="${'#deleteModal'+ user.getId()}"
-                                                        th:data-row="${user}">Удалить
-                                                </button>
+
                                                 <div aria-hidden="true" aria-labelledby="delete"
                                                      class="modal fade"
                                                      tabindex="-1" th:id="${'deleteModal'+ user.getId()}">
@@ -299,8 +272,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </td>
-                                        </tr>
+
                                         </tbody>
                                     </table>
                                 </div>
