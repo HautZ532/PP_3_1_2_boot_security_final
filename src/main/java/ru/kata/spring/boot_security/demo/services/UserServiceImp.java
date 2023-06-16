@@ -46,7 +46,9 @@ public class UserServiceImp implements UserService {
 
     @Override
     public void editUser(User user, Long[] roles) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if (!userDao.getUserByName(user.getUsername()).getPassword().equals(user.getPassword())) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
         addRole(user, roles);
         userDao.editUser(user);
     }
