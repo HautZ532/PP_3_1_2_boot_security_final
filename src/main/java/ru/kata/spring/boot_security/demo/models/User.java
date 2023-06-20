@@ -47,12 +47,6 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String username, String password, Collection<? extends GrantedAuthority> authorities) {
-        this.roles = (Set<Role>) authorities;
-        this.username = username;
-        this.password = password;
-    }
-
     public void setPassword(String password) {
         this.password = password;
     }
