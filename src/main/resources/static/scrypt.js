@@ -100,11 +100,17 @@ function editModal(id) {
             document.getElementById('ageEdit').value = u.age;
             document.getElementById('usernameEdit').value = u.username;
             document.getElementById('passEdit').value = u.password;
-            // if (u.roles.map(r => r.role) === "ROLE_ADMIN") {
-            //     document.getElementById('rolesEdit').options[1].setAttribute('selected', 'selected');
-            // } else {
+            console.log(u.roles.map(r => r.role).toString().includes("ROLE_USER"))
+            if (u.roles.map(r => r.role).toString().includes("ROLE_USER")) {
                 document.querySelector("#rolesEdit").value = "ROLE_USER";
-            // }
+                // document.getElementById('rolesEdit').options[0].setAttribute('selected', 'selected');
+                // document.getElementById('rolesEdit').options[1].setAttribute('selected', 'unselected');
+            }
+            if (u.roles.map(r => r.role).toString().includes("ROLE_ADMIN")) {
+                document.querySelector("#rolesEdit").value = "ROLE_ADMIN";
+                // document.getElementById('rolesEdit').options[1].setAttribute('selected', 'selected');
+                // document.getElementById('rolesEdit').options[0].setAttribute('selected', 'unselected');
+            }
         })
     });
 }
