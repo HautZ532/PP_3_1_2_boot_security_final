@@ -41,10 +41,10 @@ public class AdminRestController {
     }
 
     @PatchMapping("/admin/{id}")
-    public ResponseEntity<HttpStatus> editUser(@RequestBody User user, @RequestBody Long[] role) {
-//        Set<Role> roles= user.getRoles();
+    public ResponseEntity<HttpStatus> editUser(@RequestBody User user) {
+        System.out.println(user.getRoles());
 //        userService.getUser(user.getId()).setRoles(roles);
-        System.out.println(Arrays.toString(role));
+//        System.out.println(Arrays.toString(role));
         userService.editUser(user);
         return new ResponseEntity<>(HttpStatus.OK);
     }

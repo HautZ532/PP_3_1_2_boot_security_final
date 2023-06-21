@@ -47,6 +47,7 @@ public class UserServiceImp implements UserService {
     @Override
     public void editUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        System.out.println(user.getRoles());
         userDao.editUser(user);
     }
 

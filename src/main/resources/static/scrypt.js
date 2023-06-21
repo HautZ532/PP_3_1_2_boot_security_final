@@ -118,35 +118,23 @@ async function editUser() {
     let ageValue = document.getElementById("ageEdit").value;
     let emailValue = document.getElementById("usernameEdit").value;
     let passwordValue = document.getElementById("passEdit").value;
-    // let role = document.getElementById('rolesEdit');
-    // let roleValue;
-    // for (let i = 0; i < role.options.length; i++) {
-    //     if (role.options[i].selected) {
-    //         roleValue = role.options[i].value;
-    //     }
-    // }
-    let roleValue = [];
-    for (let i = 0; i < form_ed.options.length; i++) {
-        if (form_ed.options[i].selected) {
-            let tmp = {};
-            tmp["id"] = form_ed.options[i].value;
-            console.log(form_ed.options[0].value);
-            console.log(form_ed.options[1].value);
-            roleValue.push(tmp);
+    let adminRole = {id:2, role:'ROLE_ADMIN'};
+    let userRole = {id:1, role:'ROLE_USER'};
+    let setRoles = [];
+        if (form_ed.options[0].selected){
+            setRoles.push(userRole)
         }
-    }
-    // let roleValue = document.getElementById("").value;
+        if(form_ed.options[1].selected){
+            setRoles.push(adminRole)
+        }
     let user = {
         id: idValue,
         name: nameValue,
         surname: lastNameValue,
         age: ageValue,
         username: emailValue,
-        password: passwordValue
-        // roles: roleValue
-    }
-    let role = {
-        roles: roleValue
+        password: passwordValue,
+        roles: setRoles
     }
     await fetch(url + '/' + user.id, {
         method: "PATCH",

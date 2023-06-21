@@ -32,7 +32,6 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public void editUser(User user) {
-        System.out.println(user.getRoles());
         entityManager.merge(user);
         entityManager.flush();
     }
