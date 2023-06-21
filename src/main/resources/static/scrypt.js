@@ -26,7 +26,7 @@ function loadTable(listAllUsers) {
                 <td>${user.surname}</td>
                 <td>${user.age}</td>
                 <td>${user.username}</td>
-                <td th:text="${user.roles}"></td>
+                <td>${user.roles.map(r => r.role)}</td>
                 <td>
                     <button class="btn btn-info" type="button"
                     data-bs-toggle="modal" data-bs-target="#editModal"
@@ -80,7 +80,6 @@ document.getElementById('newUserForm').addEventListener('submit', (e) => {
 
 // Закрытие модального окна
 function closeModal() {
-    // document.getElementById("editClose").click()
     document.querySelectorAll(".btn-close").forEach((btn) => btn.click())
 }
 
@@ -95,42 +94,59 @@ function editModal(id) {
     }).then(res => {
         res.json().then(u => {
 
-            document.getElementById('editId').value = u.id;
-            document.getElementById('editName').value = u.name;
-            document.getElementById('editLastName').value = u.lastName;
-            document.getElementById('editAge').value = u.age;
-            document.getElementById('editEmail').value = u.userName;
-            document.getElementById('editPassword').value = "****";
-
+            document.getElementById('idEdit').value = u.id;
+            document.getElementById('nameEdit').value = u.name;
+            document.getElementById('lastNameEdit').value = u.surname;
+            document.getElementById('ageEdit').value = u.age;
+            document.getElementById('usernameEdit').value = u.username;
+            document.getElementById('passEdit').value = u.password;
+            // if (u.roles.map(r => r.role) === "ROLE_ADMIN") {
+            //     document.getElementById('rolesEdit').options[1].setAttribute('selected', 'selected');
+            // } else {
+                document.querySelector("#rolesEdit").value = "ROLE_USER";
+            // }
         })
     });
 }
 
 
 async function editUser() {
-    const form_ed = document.getElementById('modalEdit');
-    let idValue = document.getElementById("editId").value;
-    let nameValue = document.getElementById("editName").value;
-    let lastNameValue = document.getElementById("editLastName").value;
-    let ageValue = document.getElementById('editAge').value;
-    let emailValue = document.getElementById("editEmail").value;
-    let passwordValue = document.getElementById("editPassword").value;
-    let listOfRole = [];
-    for (let i=0; i<form_ed.roles.options.length; i++) {
-        if (form_ed.roles.options[i].selected) {
-            let tmp={};
-            tmp["id"]=form_ed.roles.options[i].value
-            listOfRole.push(tmp);
+    const form_ed = document.getElementById('rolesEdit');
+    let idValue = document.getElementById("idEdit").value;
+    let nameValue = document.getElementById("nameEdit").value;
+    let lastNameValue = document.getElementById("lastNameEdit").value;
+    let ageValue = document.getElementById("ageEdit").value;
+    let emailValue = document.getElementById("usernameEdit").value;
+    let passwordValue = document.getElementById("passEdit").value;
+    // let role = document.getElementById('rolesEdit');
+    // let roleValue;
+    // for (let i = 0; i < role.options.length; i++) {
+    //     if (role.options[i].selected) {
+    //         roleValue = role.options[i].value;
+    //     }
+    // }
+    let roleValue = [];
+    for (let i = 0; i < form_ed.options.length; i++) {
+        if (form_ed.options[i].selected) {
+            let tmp = {};
+            tmp["id"] = form_ed.options[i].value;
+            console.log(form_ed.options[0].value);
+            console.log(form_ed.options[1].value);
+            roleValue.push(tmp);
         }
     }
+    // let roleValue = document.getElementById("").value;
     let user = {
         id: idValue,
         name: nameValue,
-        lastName: lastNameValue,
+        surname: lastNameValue,
         age: ageValue,
-        userName: emailValue,
-        password: passwordValue,
-        role: listOfRole
+        username: emailValue,
+        password: passwordValue
+        // roles: roleValue
+    }
+    let role = {
+        roles: roleValue
     }
     await fetch(url + '/' + user.id, {
         method: "PATCH",

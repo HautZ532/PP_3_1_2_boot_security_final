@@ -53,6 +53,15 @@ public class User implements UserDetails {
         this.password = password;
     }
 
+    public User(String name, String surname, String age, String username, String password, Set<Role> roles) {
+        this.name = name;
+        this.surname = surname;
+        this.age = age;
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }

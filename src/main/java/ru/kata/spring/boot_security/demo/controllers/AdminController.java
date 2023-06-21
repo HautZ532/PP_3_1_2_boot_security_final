@@ -65,7 +65,7 @@ public class AdminController {
 
     @PatchMapping()
     public String userUpdate(@ModelAttribute("user") User user, @RequestParam(value = "rolesId") Long[] roles) {
-        userService.editUser(user, roles);
+        userService.editUser(user);
         return "redirect:/admin";
     }
 
