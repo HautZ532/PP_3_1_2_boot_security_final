@@ -85,7 +85,6 @@
                                             <th>Удалить</th>
                                         </tr>
                                         </thead>
-
                                         <tbody id="user_table">
                                                 <div aria-hidden="true" aria-labelledby="edit" tabindex="-1"
                                                      class="modal fade" id="editModal">
@@ -196,6 +195,7 @@
                                                                 <div class="modal-body col-md text-center">
 
                                                                     <div class="modal-body col-md text-center">
+                                                                        <form class="text-center" id="modalDelete">
                                                                         <div class="mb-3">
                                                                             <label class="col-form-label"
                                                                                    for="idDelete"><b>ID</b></label>
@@ -261,6 +261,7 @@
                                                                                 <option value="2">ADMIN</option>
                                                                             </select>
                                                                         </div>
+                                                                        </form>
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button class="btn btn-secondary" data-bs-dismiss="modal"
@@ -275,7 +276,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                         </tbody>
                                     </table>
                                 </div>
@@ -286,14 +286,14 @@
                             <div class="card">
                                 <h5 class="card-header">Создание нового пользователя</h5>
                                 <div class="card-body text-center mx-auto" style="width: 25%">
-                                    <form th:action="@{/admin/new}" th:method="POST" th:object="${newUser}">
+                                    <form id="addUser">
                                         <div class="mb-3">
                                             <label class="col-form-label"
                                                    for="create_username"><b>Имя</b></label>
                                             <input class="form-control"
                                                    id="create_username" maxlength="20"
                                                    minlength="2" name="name"
-                                                   required th:field="*{name}" type="text"/>
+                                                   required type="text"/>
                                         </div>
                                         <div class="mb-3">
                                             <label class="col-form-label"
@@ -302,7 +302,7 @@
                                                    id="create_surname"
                                                    maxlength="20"
                                                    minlength="2" name="lastName"
-                                                   required th:field="*{surname}" type="text"/>
+                                                   required type="text"/>
                                         </div>
                                         <div class="mb-3">
                                             <label class="col-form-label"
@@ -311,7 +311,7 @@
                                                    id="create_age"
                                                    maxlength="20"
                                                    minlength="2" name="age"
-                                                   required th:field="*{age}" type="text"/>
+                                                   required type="text"/>
                                         </div>
                                         <div class="mb-3">
                                             <label class="col-form-label"
@@ -319,7 +319,7 @@
                                             <input class="form-control"
                                                    id="create_email"
                                                    name="username"
-                                                   th:field="*{username}" type="email"/>
+                                                   required type="email"/>
                                         </div>
                                         <div class="mb-3">
                                             <label class="col-form-label"
@@ -327,7 +327,7 @@
                                             <input class="form-control"
                                                    id="create_password"
                                                    name="username"
-                                                   th:field="*{password}" type="text"/>
+                                                   required type="text"/>
                                         </div>
                                         <div class="mb-3">
                                             <label for="create_role"><b>Права</b></label>

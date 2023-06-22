@@ -51,7 +51,7 @@ public class AdminController {
 
     @PostMapping("/new")
     public String saveUser(@ModelAttribute("user") User user, @RequestParam(value = "rolesId") Long[] roles) {
-        userService.saveUser(user, roles);
+        userService.saveUser(user);
         return "redirect:/admin";
     }
 

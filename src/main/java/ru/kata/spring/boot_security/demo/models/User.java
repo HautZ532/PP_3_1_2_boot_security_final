@@ -5,7 +5,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import java.util.Collection;
 import java.util.Objects;
@@ -40,7 +39,7 @@ public class User implements UserDetails {
     @NotEmpty(message = "Укажите пароль")
     private String password;
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
@@ -51,15 +50,6 @@ public class User implements UserDetails {
         this.roles = (Set<Role>) authorities;
         this.username = username;
         this.password = password;
-    }
-
-    public User(String name, String surname, String age, String username, String password, Set<Role> roles) {
-        this.name = name;
-        this.surname = surname;
-        this.age = age;
-        this.username = username;
-        this.password = password;
-        this.roles = roles;
     }
 
     public void setPassword(String password) {

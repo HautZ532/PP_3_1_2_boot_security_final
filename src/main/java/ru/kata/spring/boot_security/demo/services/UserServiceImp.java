@@ -27,9 +27,8 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public void saveUser(User user, Long[] roles) {
+    public void saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        addRole(user, roles);
         userDao.saveUser(user);
     }
 
@@ -47,7 +46,6 @@ public class UserServiceImp implements UserService {
     @Override
     public void editUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        System.out.println(user.getRoles());
         userDao.editUser(user);
     }
 
@@ -63,11 +61,4 @@ public class UserServiceImp implements UserService {
         return userDao.getUserByName(username);
     }
 
-    private void addRole(User user, Long[] roles) {
-        Set<Role> roleSet = new HashSet<>();
-        for (Long role : roles) {
-            roleSet.add(roleService.getRoleById(role));
-        }
-        user.setRoles(roleSet);
-    }
 }
